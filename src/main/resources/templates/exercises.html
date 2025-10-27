@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercises</title>
+    <style>
+        body { font-family: sans-serif; margin: 24px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; }
+        th { background: #f2f2f2; }
+        nav a { margin-right: 12px; }
+    </style>
+</head>
+<body>
+<nav>
+    <a href="/trainers">Trainers</a>
+    <a href="/exercises">Exercises</a>
+    <a href="/fitness">Fitness</a>
+</nav>
+<h2>Exercises</h2>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Muscle Group</th>
+        <th>Duration (min)</th>
+        <th>Difficulty</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="e : ${exercises}">
+        <td th:text="${e.id}"></td>
+        <td th:text="${e.name}"></td>
+        <td th:text="${e.muscleGroup}"></td>
+        <td th:text="${e.durationMinutes}"></td>
+        <td th:text="${e.difficulty}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

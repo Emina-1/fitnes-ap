@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Trainers</title>
+    <style>
+        body { font-family: sans-serif; margin: 24px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; }
+        th { background: #f2f2f2; }
+        .badge { background:#eee; padding:2px 6px; margin-right:6px; border-radius:4px; display:inline-block;}
+        nav a { margin-right: 12px; }
+    </style>
+</head>
+<body>
+<nav>
+    <a href="/trainers">Trainers</a>
+    <a href="/exercises">Exercises</a>
+    <a href="/fitness">Fitness</a>
+</nav>
+<h2>Trainers</h2>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Specialty</th>
+        <th>Experience Years</th>
+        <th>Exercises</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="t : ${trainers}">
+        <td th:text="${t.id}"></td>
+        <td th:text="${t.name}"></td>
+        <td th:text="${t.specialty}"></td>
+        <td th:text="${t.experienceYears}"></td>
+        <td>
+                    <span th:each="e : ${t.exercises}"
+                          th:text="${e.name}" class="badge"></span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
