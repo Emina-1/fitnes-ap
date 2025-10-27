@@ -69,3 +69,8 @@ git clone https://github.com/Emina-1/fitnes-ap.git
 4. Iz IDE-a pokreni glavnu klasu FitnessApplication.java
 5. Pristup aplikaciji putem http://localhost:8080
 
+##Podjela zadataka:
+Emina - model Trainer, rute za prikaz svih Trainer objekata i detalja jednog trenera, trainers.html
+Amina - model Exercise, rute, exercises.html
+Zajedno - akcija u kontroleru, trainer-details.html
+
