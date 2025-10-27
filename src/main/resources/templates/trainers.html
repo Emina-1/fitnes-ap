@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Trainers</title>
@@ -17,8 +16,8 @@
 <nav>
     <a href="/trainers">Trainers</a>
     <a href="/exercises">Exercises</a>
-    <a href="/fitness">Fitness</a>
 </nav>
+
 <h2>Trainers</h2>
 <table>
     <thead>
@@ -28,6 +27,7 @@
         <th>Specialty</th>
         <th>Experience Years</th>
         <th>Exercises</th>
+        <th>Details</th>
     </tr>
     </thead>
     <tbody>
@@ -37,8 +37,10 @@
         <td th:text="${t.specialty}"></td>
         <td th:text="${t.experienceYears}"></td>
         <td>
-                    <span th:each="e : ${t.exercises}"
-                          th:text="${e.name}" class="badge"></span>
+            <span th:each="e : ${t.exercises}" th:text="${e.name}" class="badge"></span>
+        </td>
+        <td>
+            <a th:href="@{'/trainer/' + ${t.id}}">View details</a>
         </td>
     </tr>
     </tbody>

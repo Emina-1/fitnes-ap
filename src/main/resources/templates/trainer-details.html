@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalji trenera</title>
+</head>
+<body>
+<h2 th:text="'Trener: ' + ${trainer.name}"></h2>
+<p>Specijalnost: <span th:text="${trainer.specialty}"></span></p>
+<p>Iskustvo: <span th:text="${trainer.experienceYears}"></span> godina</p>
+
+<h3>Vježbe koje vodi:</h3>
+<ul>
+    <li th:each="e : ${trainer.exercises}">
+        <span th:text="${e.name}"></span> - <span th:text="${e.muscleGroup}"></span>
+        (<span th:text="${e.difficulty}"></span>)
+    </li>
+</ul>
+
+<h3>Dodaj novu vježbu treneru:</h3>
+<form th:action="@{'/trainer/' + ${trainer.id} + '/addExercise'}" method="post">
+    <select name="exerciseId">
+        <option th:each="e : ${allExercises}" th:value="${e.id}" th:text="${e.name}"></option>
+    </select>
+    <button type="submit">Dodaj vježbu</button>
+</form>
+
+<br>
+<a href="/trainers">← Nazad na trenere</a>
+</body>
+</html>

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Exercises</title>
@@ -16,8 +15,8 @@
 <nav>
     <a href="/trainers">Trainers</a>
     <a href="/exercises">Exercises</a>
-    <a href="/fitness">Fitness</a>
 </nav>
+
 <h2>Exercises</h2>
 <table>
     <thead>
@@ -39,5 +38,14 @@
     </tr>
     </tbody>
 </table>
+<h3>Dodaj novu vježbu:</h3>
+<form th:action="@{/exercises/add}" method="post">
+    <input type="text" name="name" placeholder="Naziv vježbe" required />
+    <input type="text" name="muscleGroup" placeholder="Mišićna grupa" required />
+    <input type="number" name="durationMinutes" placeholder="Trajanje (min)" required />
+    <input type="text" name="difficulty" placeholder="Težina" required />
+    <button type="submit">Dodaj vježbu</button>
+</form>
+
 </body>
 </html>

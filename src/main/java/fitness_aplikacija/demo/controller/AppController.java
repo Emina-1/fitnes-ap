@@ -21,23 +21,28 @@ public class AppController {
         return "redirect:/trainers";
     }
 
-
     @GetMapping("/trainers")
     public String trainers(Model model) {
         model.addAttribute("trainers", data.findAllTrainers());
         return "trainers";
     }
 
-
-
-
+    @GetMapping("/trainer/{id}")
+    public String trainerDetails(@PathVariable int id, Model model) {
+        Trainer trainer = data.findTrainer(id);
+        if (trainer == null) {
+            return "redirect:/trainers";
+        }
+        model.addAttribute("trainer", trainer);
+        model.addAttribute("allExercises", data.findAllExercises());
+        return "trainer-details";
+    }
 
     @GetMapping("/exercises")
     public String exercises(Model model) {
         model.addAttribute("exercises", data.findAllExercises());
         return "exercises";
     }
-
 
     @PostMapping("/exercises/add")
     public String addExercise(@RequestParam String name,
@@ -49,7 +54,6 @@ public class AppController {
         data.saveExercise(newExercise);
         return "redirect:/exercises";
     }
-
 
     @PostMapping("/trainer/{trainerId}/addExercise")
     public String addExerciseToTrainer(@PathVariable int trainerId,
