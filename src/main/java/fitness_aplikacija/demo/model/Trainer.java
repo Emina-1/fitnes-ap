@@ -48,7 +48,7 @@ public class Trainer {
 
 
     public boolean canAddExercise() {
-        return exercises.size() < 10; // primjer ograničenja, možeš mijenjati
+        return exercises.size() < 10;
     }
 
     public void addExercise(Exercise e) {

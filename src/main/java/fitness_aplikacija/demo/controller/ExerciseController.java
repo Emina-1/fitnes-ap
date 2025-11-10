@@ -20,7 +20,7 @@ public class ExerciseController {
     @GetMapping
     public String showAll(Model model) {
         model.addAttribute("exercises", exerciseService.findAll());
-        return "exercises"; // ime Thymeleaf template-a: exercises.html
+        return "exercises";
     }
 
 

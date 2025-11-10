@@ -24,7 +24,7 @@ public class TrainerController {
     public String showAll(Model model) {
         model.addAttribute("trainers", trainerService.findAll());
         model.addAttribute("allExercises", exerciseRepo.findAll());
-        return "trainers"; // -> templates/trainers.html
+        return "trainers";
     }
 
 
@@ -35,7 +35,7 @@ public class TrainerController {
             return "redirect:/trainers";
         }
         model.addAttribute("trainer", trainer);
-        return "trainer-details"; // -> templates/trainer-details.html
+        return "trainer-details";
     }
 
 

@@ -158,6 +158,6 @@ Relacije su definirane u entitetima koristeći JPA anotacije (@ManyToOne, @ManyT
 git clone https://github.com/Emina-1/fitnes-ap.git
 2. Otvori projekat u IntelliJ IDEA ili drugom IDE-u koji podržava Spring Boot.
 3. Pokreni Maven build
-4. Iz IDE-a pokreni glavnu klasu FitnessApplication.java
+4. Iz IDE-a pokreni glavnu klasu FitnessAplikacijaApplication.java
 5. Pristup aplikaciji putem http://localhost:8080
 
