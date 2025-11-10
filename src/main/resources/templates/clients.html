@@ -5,15 +5,12 @@
 </head>
 <body>
 <nav>
-    <a href="/trainers">Trainers</a>
-    <a href="/exercises">Exercises</a>
+    <a href="/trainers">Trainers</a> |
+    <a href="/exercises">Exercises</a> |
     <a href="/clients">Klijenti</a>
 </nav>
 
 <h2>Lista Klijenata</h2>
-
-<a th:href="@{/clients/new}">➕ Dodaj novog klijenta</a>
-<br/><br/>
 
 <table border="1">
     <thead>
@@ -43,33 +40,27 @@
 
 <hr/>
 
-<div th:if="${client != null}">
-    <h2 th:text="${client.id == null ? 'Dodaj Klijenta' : 'Uredi Klijenta'}"></h2>
+<h3 th:text="${client.id == null ? 'Dodaj Klijenta' : 'Uredi Klijenta'}"></h3>
 
-    <form th:action="@{${client.id == null} ? '/clients/save' : '/clients/update/' + ${client.id}}"
-          th:object="${client}" method="post">
+<form th:action="@{${client.id == null} ? '/clients/save' : '/clients/update/' + ${client.id}}"
+      th:object="${client}" method="post">
 
-        <label>Ime:</label>
-        <input type="text" th:field="*{name}" required /><br/><br/>
+    <label>Ime:</label>
+    <input type="text" th:field="*{name}" required/><br/><br/>
 
-        <label>Godine:</label>
-        <input type="number" th:field="*{age}" required /><br/><br/>
+    <label>Godine:</label>
+    <input type="number" th:field="*{age}" required/><br/><br/>
 
-        <label>Cilj:</label>
-        <input type="text" th:field="*{goal}" required /><br/><br/>
+    <label>Cilj:</label>
+    <input type="text" th:field="*{goal}" required/><br/><br/>
 
-        <label>Trener:</label>
-        <select th:field="*{trainer}" required>
-            <option th:each="t : ${trainers}" th:value="${t}" th:text="${t.name}"></option>
-        </select>
-        <br/><br/>
+    <label>Trener:</label>
+    <select name="trainerId" required>
+        <option th:each="t : ${trainers}" th:value="${t.id}" th:text="${t.name}"></option>
+    </select><br/><br/>
 
-        <button type="submit">Spremi</button>
-    </form>
-</div>
-
-<br/>
-<a th:href="@{/clients}">⬅ Nazad na listu klijenata</a>
+    <button type="submit">Spremi</button>
+</form>
 
 </body>
 </html>

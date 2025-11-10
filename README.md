@@ -8,7 +8,7 @@ Glavne funkcionalnosti:
 - Lista svih trenera i detalji o svakom treneru
 - Pregled svih vježbi i dodavanje novih
 - Dodavanje postojećih vježbi treneru
-- Lista svih klijenata (novi model)
+- Lista svih klijenata (novi model), dodavanje novih, uređivanje i brisanje psotojećih
 
 ### Modeli
 1. **Trainer**
@@ -24,76 +24,66 @@ Glavne funkcionalnosti:
     - `muscleGroup` – ciljna mišićna grupa
     - `durationMinutes` – trajanje vježbe u minutama
     - `difficulty` – težina vježbe
+- Relacija **Exercise-Trainer (Many-to-many)**: Jedan trener (`Trainer`) može imati više vježbi (`Exercise`) i obratno. Veza je prikazana u view-u na stranici detalja trenera (`trainer-details.html`)
 
-3. **Client**
+3. **Client-NOVI MODEL**
    - `id` – jedinstveni identifikator
-   - `name` – naziv vježbe
+   - `name` – ime klijenta
    - `age` – godine
-   - `goal` – cilj
+   - `goal` – cilj treninga
    - `trainer` – trener
 
-### Relacija
-- **1:N**: Jedan trener (`Trainer`) može imati više vježbi (`Exercise`)
-- Veza je prikazana u view-u na stranici detalja trenera (`trainer-details.html`)
--Veza 1:N između trenera i klijenata (jedan trener može imati više klijenata a jedan klijent samo jednog trenera)
+### Opis logike dodavanja novog modela i ostvarene relacije
 
-## Kontroleri i GET rute
-MVC rute (Thymeleaf)
--/trainers – prikaz liste svih trenera (trainers.html).
+### Nove relacije
+- **Client-Trainer (Many-to-one)**: (jedan trener može imati više klijenata a jedan klijent samo jednog trenera)
 
--/trainers/{id} – detalji jednog trenera i forma za dodavanje vježbi (trainer-details.html).
 
--/exercises – prikaz liste svih vježbi i forma za dodavanje novih (exercises.html).
+### Client Controller funkcionalnosti
+Ovaj kontroler omogućava rad s modelom Client putem Thymeleaf prikaza i standardnih web formi:
 
--/clients – prikaz liste svih klijenata i forma za dodavanje/uređivanje (clients.html).
+- GET /clients – prikazuje listu svih klijenata i formu za dodavanje novog klijenta (clients.html).
+- POST /clients/save – sprema novog klijenta, povezujući ga s trenerom po odabranom trainerId.
+- GET /clients/edit/{id} – prikazuje formu za uređivanje postojećeg klijenta (clients.html).
+- POST /clients/update/{id} – ažurira podatke postojećeg klijenta i njegovog trenera.
+- GET /clients/delete/{id} – briše klijenta po ID-u.
 
--/clients/new – prikaz forme za dodavanje novog klijenta (Thymeleaf forma unutar clients.html).
+### RestController
+Ovaj kontroler omogućava rad s modelom Client putem REST API-ja, vraćajući JSON podatke:
 
--/ – početna ruta koja preusmjerava na /trainers.
+- GET /api/clients – vraća listu svih klijenata.
+- GET /api/clients/{id} – vraća jednog klijenta po ID-u.
+- POST /api/clients – dodaje novog klijenta (prima JSON objekt).
+- PUT /api/clients/{id} – ažurira postojećeg klijenta po ID-u (prima JSON objekt).
+- DELETE /api/clients/{id} – briše klijenta po ID-u
 
-REST API rute (JSON)
-
--GET /api/trainers – vraća listu svih trenera u JSON formatu.
-
--GET /api/trainers/{id} – vraća jednog trenera po ID-u u JSON formatu.
-
--POST /api/trainers – dodaje novog trenera (prima JSON objekt).
-
--PUT /api/trainers/{id} – ažurira postojećeg trenera po ID-u (prima JSON objekt).
-
--DELETE /api/trainers/{id} – briše trenera po ID-u.
-
--POST /api/trainers/{trainerId}/exercises/{exerciseId} – dodaje postojeću vježbu treneru po ID-u.
-
--GET /api/clients – vraća listu svih klijenata u JSON formatu.
-
--GET /api/clients/{id} – vraća jednog klijenta po ID-u u JSON formatu.
-
--POST /api/clients – dodaje novog klijenta (prima JSON objekt).
-
--PUT /api/clients/{id} – ažurira postojećeg klijenta po ID-u (prima JSON objekt).
-
--DELETE /api/clients/{id} – briše klijenta po ID-u.
+### Konfiguracija baze
+Ovaj projekat koristi MySQL bazu podataka za pohranu podataka o trenerima, klijentima i vježbama.
+U application.properties konfigurisan je pristup MySQL bazi.
+Projekt koristi JPA entitete za kreiranje tablica:
+- Trainer – tablica trainer
+- Client – tablica client (relacija Many-to-One prema Trainer)
+- Exercise – tablica exercise (relacija Many-to-many prema Trainer)
 
 ## HTML stranice
-- `trainers.html` – lista trenera
-- `trainer-details.html` – detalji jednog trenera + dodavanje postojećih vježbi
+- `trainers.html` – lista trenera i dodavanje novog trenera
+- `trainer-details.html` – detalji jednog trenera, dodavanje postojećih vježbi
 - `exercises.html` – lista vježbi i dodavanje novih
 - `clients.html` - list svih klijenata, dodavanje novih, uređivanje i brisanje postojećih
 
 ## Screenshot aplikacije
 
 ### Lista trenera
-![Trainers](src/main/resources/static/images/trainers.png)
+![Trainers](src/main/resources/static/images/treneri_lab2.png)
 
-### Detalji trenera - prikaz 1
-![Trainer Details 1](src/main/resources/static/images/trainer-details1.png)
-
-### Detalji trenera - prikaz 2
-![Trainer Details 2](src/main/resources/static/images/trainer-details2.png)
+### Detalji trenera
+![Trainer Details 1](src/main/resources/static/images/detalji_lab2.png)
 
 ### Lista vježbi
-![Exercises](src/main/resources/static/images/exercises.png)
+![Exercises](src/main/resources/static/images/vjezbe_lab2.png)
+
+### Lista klijenata
+![Clients](src/main/resources/static/images/klijenti_lab2.png)
 
 ## Tehnologije
 - Java 17
