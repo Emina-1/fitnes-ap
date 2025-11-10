@@ -26,7 +26,7 @@ Glavne funkcionalnosti:
     - `difficulty` – težina vježbe 
 
 ### Relacija
-- **1:N**: Jedan trener (`Trainer`) može imati više vježbi (`Exercise`)
+- Jedan trener (`Trainer`) može imati više vježbi (`Exercise`), i obratno.
 - Veza je prikazana u view-u na stranici detalja trenera (`trainer-details.html`)
 
 ## Kontroleri i GET rute
