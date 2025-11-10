@@ -8,7 +8,7 @@ Glavne funkcionalnosti:
 - Lista svih trenera i detalji o svakom treneru
 - Pregled svih vježbi i dodavanje novih
 - Dodavanje postojećih vježbi treneru
-- Aplikacija radi sa in-memory podacima (bez baze) putem `DemoData.java`
+- Lista svih klijenata (novi model)
 
 ### Modeli
 1. **Trainer**
@@ -23,22 +23,63 @@ Glavne funkcionalnosti:
     - `name` – naziv vježbe
     - `muscleGroup` – ciljna mišićna grupa
     - `durationMinutes` – trajanje vježbe u minutama
-    - `difficulty` – težina vježbe 
+    - `difficulty` – težina vježbe
+
+3. **Client**
+   - `id` – jedinstveni identifikator
+   - `name` – naziv vježbe
+   - `age` – godine
+   - `goal` – cilj
+   - `trainer` – trener
 
 ### Relacija
 - **1:N**: Jedan trener (`Trainer`) može imati više vježbi (`Exercise`)
 - Veza je prikazana u view-u na stranici detalja trenera (`trainer-details.html`)
+-Veza 1:N između trenera i klijenata (jedan trener može imati više klijenata a jedan klijent samo jednog trenera)
 
 ## Kontroleri i GET rute
-1. `/trainers` – prikaz liste svih trenera (`trainers.html`)
-2. `/trainer/{id}` – detalji jednog trenera i forma za dodavanje vježbi (`trainer-details.html`)
-3. `/exercises` – prikaz liste svih vježbi i forma za dodavanje novih (`exercises.html`)
-4. `/` – početna ruta koja preusmjerava na `/trainers`
+MVC rute (Thymeleaf)
+-/trainers – prikaz liste svih trenera (trainers.html).
+
+-/trainers/{id} – detalji jednog trenera i forma za dodavanje vježbi (trainer-details.html).
+
+-/exercises – prikaz liste svih vježbi i forma za dodavanje novih (exercises.html).
+
+-/clients – prikaz liste svih klijenata i forma za dodavanje/uređivanje (clients.html).
+
+-/clients/new – prikaz forme za dodavanje novog klijenta (Thymeleaf forma unutar clients.html).
+
+-/ – početna ruta koja preusmjerava na /trainers.
+
+REST API rute (JSON)
+
+-GET /api/trainers – vraća listu svih trenera u JSON formatu.
+
+-GET /api/trainers/{id} – vraća jednog trenera po ID-u u JSON formatu.
+
+-POST /api/trainers – dodaje novog trenera (prima JSON objekt).
+
+-PUT /api/trainers/{id} – ažurira postojećeg trenera po ID-u (prima JSON objekt).
+
+-DELETE /api/trainers/{id} – briše trenera po ID-u.
+
+-POST /api/trainers/{trainerId}/exercises/{exerciseId} – dodaje postojeću vježbu treneru po ID-u.
+
+-GET /api/clients – vraća listu svih klijenata u JSON formatu.
+
+-GET /api/clients/{id} – vraća jednog klijenta po ID-u u JSON formatu.
+
+-POST /api/clients – dodaje novog klijenta (prima JSON objekt).
+
+-PUT /api/clients/{id} – ažurira postojećeg klijenta po ID-u (prima JSON objekt).
+
+-DELETE /api/clients/{id} – briše klijenta po ID-u.
 
 ## HTML stranice
 - `trainers.html` – lista trenera
 - `trainer-details.html` – detalji jednog trenera + dodavanje postojećih vježbi
 - `exercises.html` – lista vježbi i dodavanje novih
+- `clients.html` - list svih klijenata, dodavanje novih, uređivanje i brisanje postojećih
 
 ## Screenshot aplikacije
 

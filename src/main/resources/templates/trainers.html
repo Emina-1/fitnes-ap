@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <title>Trainers</title>
     <style>
         body { font-family: sans-serif; margin: 24px; }
@@ -16,34 +16,54 @@
 <nav>
     <a href="/trainers">Trainers</a>
     <a href="/exercises">Exercises</a>
+    <a href="/clients">Klijenti</a>
 </nav>
 
 <h2>Trainers</h2>
+
 <table>
     <thead>
     <tr>
         <th>ID</th>
         <th>Name</th>
         <th>Specialty</th>
-        <th>Experience Years</th>
+        <th>Experience (Years)</th>
         <th>Exercises</th>
-        <th>Details</th>
+        <th>Actions</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="t : ${trainers}">
         <td th:text="${t.id}"></td>
-        <td th:text="${t.name}"></td>
+        <td>
+            <a th:href="@{/trainers/{id}(id=${t.id})}" th:text="${t.name}"></a>
+        </td>
         <td th:text="${t.specialty}"></td>
         <td th:text="${t.experienceYears}"></td>
         <td>
             <span th:each="e : ${t.exercises}" th:text="${e.name}" class="badge"></span>
+            <form th:action="@{/trainers/addExercise}" method="post" style="display:inline">
+                <input type="hidden" name="trainerId" th:value="${t.id}"/>
+                <select name="exerciseId">
+                    <option th:each="e : ${allExercises}" th:value="${e.id}" th:text="${e.name}"></option>
+                </select>
+                <button type="submit">Add Exercise</button>
+            </form>
         </td>
         <td>
-            <a th:href="@{'/trainer/' + ${t.id}}">View details</a>
+            <a th:href="@{/trainers/delete/{id}(id=${t.id})}">Delete</a>
         </td>
     </tr>
     </tbody>
 </table>
+
+<h3>Add new trainer</h3>
+<form th:action="@{/trainers/add}" method="post">
+    Name: <input type="text" name="name"/><br>
+    Specialty: <input type="text" name="specialty"/><br>
+    Experience (Years): <input type="number" name="experienceYears"/><br>
+    <button type="submit">Add Trainer</button>
+</form>
+
 </body>
 </html>

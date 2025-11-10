@@ -18,14 +18,15 @@
 </ul>
 
 <h3>Dodaj novu vježbu treneru:</h3>
-<form th:action="@{'/trainer/' + ${trainer.id} + '/addExercise'}" method="post">
+<form th:action="@{'/trainers/addExercise'}" method="post">
+    <input type="hidden" name="trainerId" th:value="${trainer.id}"/>
     <select name="exerciseId">
         <option th:each="e : ${allExercises}" th:value="${e.id}" th:text="${e.name}"></option>
     </select>
     <button type="submit">Dodaj vježbu</button>
 </form>
 
-<br>
-<a href="/trainers">← Nazad na trenere</a>
+<br><br>
+<a th:href="@{/trainers}">← Nazad na trenere</a>
 </body>
 </html>

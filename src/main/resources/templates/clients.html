@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Klijenti</title>
+</head>
+<body>
+<nav>
+    <a href="/trainers">Trainers</a>
+    <a href="/exercises">Exercises</a>
+    <a href="/clients">Klijenti</a>
+</nav>
+
+<h2>Lista Klijenata</h2>
+
+<a th:href="@{/clients/new}">➕ Dodaj novog klijenta</a>
+<br/><br/>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Ime</th>
+        <th>Godine</th>
+        <th>Cilj</th>
+        <th>Trener</th>
+        <th>Akcije</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="c : ${clients}">
+        <td th:text="${c.id}"></td>
+        <td th:text="${c.name}"></td>
+        <td th:text="${c.age}"></td>
+        <td th:text="${c.goal}"></td>
+        <td th:text="${c.trainer != null ? c.trainer.name : 'Nema trenera'}"></td>
+        <td>
+            <a th:href="@{/clients/edit/{id}(id=${c.id})}">Uredi</a> |
+            <a th:href="@{/clients/delete/{id}(id=${c.id})}">Obriši</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<hr/>
+
+<div th:if="${client != null}">
+    <h2 th:text="${client.id == null ? 'Dodaj Klijenta' : 'Uredi Klijenta'}"></h2>
+
+    <form th:action="@{${client.id == null} ? '/clients/save' : '/clients/update/' + ${client.id}}"
+          th:object="${client}" method="post">
+
+        <label>Ime:</label>
+        <input type="text" th:field="*{name}" required /><br/><br/>
+
+        <label>Godine:</label>
+        <input type="number" th:field="*{age}" required /><br/><br/>
+
+        <label>Cilj:</label>
+        <input type="text" th:field="*{goal}" required /><br/><br/>
+
+        <label>Trener:</label>
+        <select th:field="*{trainer}" required>
+            <option th:each="t : ${trainers}" th:value="${t}" th:text="${t.name}"></option>
+        </select>
+        <br/><br/>
+
+        <button type="submit">Spremi</button>
+    </form>
+</div>
+
+<br/>
+<a th:href="@{/clients}">⬅ Nazad na listu klijenata</a>
+
+</body>
+</html>
