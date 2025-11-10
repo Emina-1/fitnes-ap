@@ -27,7 +27,7 @@ Glavne funkcionalnosti:
 
 3. **Client**
    - `id` – jedinstveni identifikator
-   - `name` – naziv vježbe
+   - `name` – ime klijenta
    - `age` – godine
    - `goal` – cilj
    - `trainer` – trener
