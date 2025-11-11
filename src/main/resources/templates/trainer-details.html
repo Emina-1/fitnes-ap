@@ -2,14 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Detalji trenera</title>
+    <title>Trainer details</title>
 </head>
 <body>
 <h2 th:text="'Trener: ' + ${trainer.name}"></h2>
-<p>Specijalnost: <span th:text="${trainer.specialty}"></span></p>
-<p>Iskustvo: <span th:text="${trainer.experienceYears}"></span> godina</p>
+<p>Specialty: <span th:text="${trainer.specialty}"></span></p>
+<p>Experience: <span th:text="${trainer.experienceYears}"></span> years</p>
 
-<h3>Vježbe koje vodi:</h3>
+<h3>Exercises:</h3>
 <ul>
     <li th:each="e : ${trainer.exercises}">
         <span th:text="${e.name}"></span> - <span th:text="${e.muscleGroup}"></span>
@@ -17,16 +17,16 @@
     </li>
 </ul>
 
-<h3>Dodaj novu vježbu treneru:</h3>
+<h3>Add new exercise to trainer:</h3>
 <form th:action="@{'/trainers/addExercise'}" method="post">
     <input type="hidden" name="trainerId" th:value="${trainer.id}"/>
     <select name="exerciseId">
         <option th:each="e : ${allExercises}" th:value="${e.id}" th:text="${e.name}"></option>
     </select>
-    <button type="submit">Dodaj vježbu</button>
+    <button type="submit">Add exercise</button>
 </form>
 
 <br><br>
-<a th:href="@{/trainers}">← Nazad na trenere</a>
+<a th:href="@{/trainers}">← Back to trainers</a>
 </body>
 </html>

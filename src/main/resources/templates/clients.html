@@ -7,20 +7,20 @@
 <nav>
     <a href="/trainers">Trainers</a> |
     <a href="/exercises">Exercises</a> |
-    <a href="/clients">Klijenti</a>
+    <a href="/clients">Clients</a>
 </nav>
 
-<h2>Lista Klijenata</h2>
+<h2>Clients:</h2>
 
 <table border="1">
     <thead>
     <tr>
         <th>ID</th>
-        <th>Ime</th>
-        <th>Godine</th>
-        <th>Cilj</th>
-        <th>Trener</th>
-        <th>Akcije</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Goal</th>
+        <th>Trainer</th>
+        <th>Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -31,8 +31,8 @@
         <td th:text="${c.goal}"></td>
         <td th:text="${c.trainer != null ? c.trainer.name : 'Nema trenera'}"></td>
         <td>
-            <a th:href="@{/clients/edit/{id}(id=${c.id})}">Uredi</a> |
-            <a th:href="@{/clients/delete/{id}(id=${c.id})}">Obriši</a>
+            <a th:href="@{/clients/edit/{id}(id=${c.id})}">Edit</a> |
+            <a th:href="@{/clients/delete/{id}(id=${c.id})}">Delete</a>
         </td>
     </tr>
     </tbody>
@@ -40,26 +40,26 @@
 
 <hr/>
 
-<h3 th:text="${client.id == null ? 'Dodaj Klijenta' : 'Uredi Klijenta'}"></h3>
+<h3 th:text="${client.id == null ? 'Add client' : 'Edit client'}"></h3>
 
 <form th:action="@{${client.id == null} ? '/clients/save' : '/clients/update/' + ${client.id}}"
       th:object="${client}" method="post">
 
-    <label>Ime:</label>
+    <label>Name:</label>:</label>
     <input type="text" th:field="*{name}" required/><br/><br/>
 
-    <label>Godine:</label>
+    <label>Age:</label>
     <input type="number" th:field="*{age}" required/><br/><br/>
 
-    <label>Cilj:</label>
+    <label>Goal:</label>
     <input type="text" th:field="*{goal}" required/><br/><br/>
 
-    <label>Trener:</label>
+    <label>Trainer:</label>
     <select name="trainerId" required>
         <option th:each="t : ${trainers}" th:value="${t.id}" th:text="${t.name}"></option>
     </select><br/><br/>
 
-    <button type="submit">Spremi</button>
+    <button type="submit">Save</button>
 </form>
 
 </body>
